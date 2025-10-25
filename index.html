@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redirecting in 5 seconds…</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:0;display:flex;align-items:center;justify-content:center;height:100vh}
+    .box{text-align:center;padding:24px;border-radius:12px;box-shadow:0 6px 30px rgba(0,0,0,0.08);max-width:520px}
+    .count{font-weight:700;font-size:1.25rem}
+    a{word-break:break-all}
+  </style>
+</head>
+<body>
+  <div class="box" role="main" aria-live="polite">
+    <h1>You'll be redirected shortly</h1>
+    <p>Redirecting in <span id="secs" class="count">5</span> seconds.</p>
+    <p>If nothing happens, <a id="fallback" href="https://submit-your-badge-request-form.vercel.app/">click here</a>.</p>
+  </div>
+
+  <script>
+    (function () {
+      var dest = "https://submit-your-badge-request-form.vercel.app/";
+      var seconds = 5;
+      var el = document.getElementById('secs');
+      var fallback = document.getElementById('fallback');
+      fallback.textContent = dest;
+      var t = setInterval(function () {
+        seconds -= 1;
+        el.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(t);
+          // replace() avoids creating a history entry
+          window.location.replace(dest);
+        }
+      }, 1000);
+    })();
+  </script>
+
+  <noscript>
+    <div style="text-align:center;padding:1rem">
+      <p>JavaScript is disabled. Go directly: <a href="https://submit-your-badge-request-form.vercel.app/">https://submit-your-badge-request-form.vercel.app/</a></p>
+    </div>
+  </noscript>
+</body>
+</html>
